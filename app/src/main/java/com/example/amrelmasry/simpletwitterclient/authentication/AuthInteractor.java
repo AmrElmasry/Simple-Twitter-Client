@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import oauth.signpost.OAuthProvider;
 import oauth.signpost.commonshttp.CommonsHttpOAuthConsumer;
 import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class AuthInteractor {
@@ -38,7 +39,7 @@ public class AuthInteractor {
             } catch (Exception e) {
                 subscriber.onError(e);
             }
-        }).subscribeOn(Schedulers.io());
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 
     /***
@@ -61,6 +62,6 @@ public class AuthInteractor {
             } catch (Exception e) {
                 subscriber.onError(e);
             }
-        }).subscribeOn(Schedulers.io());
+        }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }
