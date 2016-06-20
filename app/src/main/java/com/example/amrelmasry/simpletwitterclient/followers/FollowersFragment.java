@@ -1,7 +1,6 @@
 package com.example.amrelmasry.simpletwitterclient.followers;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,6 +16,7 @@ import com.example.amrelmasry.simpletwitterclient.SimpleClientApp;
 import com.example.amrelmasry.simpletwitterclient.common.models.AccessToken;
 import com.example.amrelmasry.simpletwitterclient.common.models.User;
 import com.example.amrelmasry.simpletwitterclient.common.utils.EndlessRecyclerViewScrollListener;
+import com.example.amrelmasry.simpletwitterclient.common.utils.ItemClickSupport;
 
 import org.parceler.Parcels;
 
@@ -115,6 +115,13 @@ public class FollowersFragment extends Fragment implements FollowersContract.Vie
             }
         });
 
+        // handle on follower clicked listener using ItemClickSupport Utility class
+        ItemClickSupport.addTo(followersRecyclerView).setOnItemClickListener((recyclerView, position, v) -> {
+            User follower = adapter.getFollower(position);
+            if (mListener != null) {
+                mListener.onFollowerItemClicked(follower);
+            }
+        });
         // Inject this fragment to singleton RestComponent
         SimpleClientApp simpleClientApp = (SimpleClientApp) getActivity().getApplication();
         simpleClientApp.getRestComponent(mAccessToken).inject(this);
@@ -175,7 +182,7 @@ public class FollowersFragment extends Fragment implements FollowersContract.Vie
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFollowersInteractionListener {
-        void onFollowerItemClicked(Uri uri);
+        void onFollowerItemClicked(User follower);
 
         void onNoMoreFollowersToShow();
     }

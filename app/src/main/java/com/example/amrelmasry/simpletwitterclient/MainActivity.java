@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onFollowerItemClicked(Uri uri) {
+    public void onFollowerItemClicked(User follower) {
         // show Follower Details
     }
 
