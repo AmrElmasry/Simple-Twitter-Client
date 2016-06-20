@@ -9,6 +9,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.amrelmasry.simpletwitterclient.accounts.AccountManagerFragment;
@@ -16,6 +18,7 @@ import com.example.amrelmasry.simpletwitterclient.authentication.AuthFragment;
 import com.example.amrelmasry.simpletwitterclient.common.models.AccessToken;
 import com.example.amrelmasry.simpletwitterclient.common.models.User;
 import com.example.amrelmasry.simpletwitterclient.common.utils.NetworkUtils;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,8 +32,14 @@ public class MainActivity extends AppCompatActivity implements AuthFragment.OnAu
     private static String TOKEN_KEY = "TokenKey";
     private static String TOKEN_SECRET_KEY = "TokenSecretKey";
     private final String LOG_TAG = getClass().getSimpleName();
+
     @BindView(R.id.toolbar)
     Toolbar toolbar;
+    @BindView(R.id.user_image)
+    ImageView userImageView;
+    @BindView(R.id.user_screen_name)
+    TextView userScreenNameTextView;
+
     private AccessToken mAccessToken;
 
     @Override
@@ -42,7 +51,23 @@ public class MainActivity extends AppCompatActivity implements AuthFragment.OnAu
         ButterKnife.bind(this);
         // Setup the toolbar
         setSupportActionBar(toolbar);
-        showFragment(new AuthFragment(), AUTH_FRAGMENT_TAG);
+
+        // check if user is logged in
+        mAccessToken = getSavedAccessToken();
+        if (mAccessToken.isEmpty()) {
+            // user is not logged in, open log in screen
+            openLoginScreen();
+        } else {
+            // user is logged in, get User details
+            getLoggedInUserDetails();
+        }
+    }
+
+    private AccessToken getSavedAccessToken() {
+        SharedPreferences sharedPreferences = getSharedPreferences(ACCESS_TOKEN_SHARED_PREFERENCES, MODE_PRIVATE);
+        String token = sharedPreferences.getString(TOKEN_KEY, null);
+        String tokenSecret = sharedPreferences.getString(TOKEN_SECRET_KEY, null);
+        return new AccessToken(token, tokenSecret);
     }
 
     @Override
@@ -88,6 +113,10 @@ public class MainActivity extends AppCompatActivity implements AuthFragment.OnAu
         }
     }
 
+    private void openLoginScreen() {
+        showFragment(new AuthFragment(), AUTH_FRAGMENT_TAG);
+    }
+
 
     @Override
     protected void onResume() {
@@ -113,9 +142,10 @@ public class MainActivity extends AppCompatActivity implements AuthFragment.OnAu
     }
 
     @Override
-    public void showAccountInfo(User user) {
-        // just show toast for now
-        Toast.makeText(MainActivity.this, user.toString(), Toast.LENGTH_SHORT).show();
+    public void showAccountInfoInToolbar(User user) {
+        // Update the toolbar with the name and image
+        userScreenNameTextView.setText(user.getScreenName());
+        Picasso.with(this).load(user.getBiggerProfileImageUrl()).into(userImageView);
     }
 
     @Override
@@ -125,6 +155,9 @@ public class MainActivity extends AppCompatActivity implements AuthFragment.OnAu
         editor.putString(SAVED_USER_KEY, user.getScreenName());
         editor.commit();
         Log.i(LOG_TAG, "Token Saved Successfully");
+        // user account saved successfully, now get user followers
+//        getLoggedInUserFollowers(); // TODO
+
     }
 
     @Override
