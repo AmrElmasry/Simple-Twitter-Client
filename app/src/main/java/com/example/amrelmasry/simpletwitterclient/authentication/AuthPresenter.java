@@ -2,13 +2,14 @@ package com.example.amrelmasry.simpletwitterclient.authentication;
 
 import android.net.Uri;
 
+import com.example.amrelmasry.simpletwitterclient.common.mvpbase.BasePresenter;
+
 import javax.inject.Inject;
 
-public class AuthPresenter implements AuthContract.Presenter {
+public class AuthPresenter extends BasePresenter<AuthContract.View> implements AuthContract.Presenter {
 
     private final String LOG_TAG = getClass().getSimpleName();
     private AuthInteractor authInteractor;
-    private AuthContract.View view;
 
     @Inject
     public AuthPresenter(AuthInteractor authInteractor) {
