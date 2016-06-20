@@ -3,14 +3,15 @@ package com.example.amrelmasry.simpletwitterclient.accounts;
 import android.util.Log;
 
 import com.example.amrelmasry.simpletwitterclient.common.DataManager;
+import com.example.amrelmasry.simpletwitterclient.common.mvpbase.BasePresenter;
 
 import javax.inject.Inject;
 
-public class AccountManagerPresenter implements AccountManagerContract.Presenter {
+public class AccountManagerPresenter extends BasePresenter<AccountManagerContract.View>
+        implements AccountManagerContract.Presenter {
 
     private final String LOG_TAG = getClass().getSimpleName();
     private DataManager mDataManager;
-    private AccountManagerContract.View view;
 
     @Inject
     public AccountManagerPresenter(DataManager mDataManager) {
