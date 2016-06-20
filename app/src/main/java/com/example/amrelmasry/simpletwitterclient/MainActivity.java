@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,6 +16,9 @@ import com.example.amrelmasry.simpletwitterclient.authentication.AuthFragment;
 import com.example.amrelmasry.simpletwitterclient.common.models.AccessToken;
 import com.example.amrelmasry.simpletwitterclient.common.models.User;
 import com.example.amrelmasry.simpletwitterclient.common.utils.NetworkUtils;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements AuthFragment.OnAuthFinishListener, AccountManagerFragment.OnAccountManagerInteractionListener {
 
@@ -25,7 +29,8 @@ public class MainActivity extends AppCompatActivity implements AuthFragment.OnAu
     private static String TOKEN_KEY = "TokenKey";
     private static String TOKEN_SECRET_KEY = "TokenSecretKey";
     private final String LOG_TAG = getClass().getSimpleName();
-
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private AccessToken mAccessToken;
 
     @Override
@@ -33,8 +38,11 @@ public class MainActivity extends AppCompatActivity implements AuthFragment.OnAu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Setup Butterknife
+        ButterKnife.bind(this);
+        // Setup the toolbar
+        setSupportActionBar(toolbar);
         showFragment(new AuthFragment(), AUTH_FRAGMENT_TAG);
-
     }
 
     @Override
