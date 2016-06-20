@@ -13,10 +13,14 @@ public class User {
     @SerializedName("profile_image_url")
     private String profileImageUrl;
 
+    @SerializedName("description")
+    private String bio;
 
-    public User(String screenName, String profileImageUrl) {
+
+    public User(String screenName, String profileImageUrl, String bio) {
         this.screenName = screenName;
         this.profileImageUrl = profileImageUrl;
+        this.bio = bio;
     }
 
 
@@ -46,4 +50,7 @@ public class User {
                 + " User profile Image Url is: " + profileImageUrl;
     }
 
+    public String getBio() {
+        return bio;
+    }
 }
