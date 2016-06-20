@@ -10,6 +10,9 @@ public class User {
     @SerializedName("screen_name")
     private String screenName;
 
+    @SerializedName("name")
+    private String fullName;
+
     @SerializedName("profile_image_url")
     private String profileImageUrl;
 
@@ -17,8 +20,9 @@ public class User {
     private String bio;
 
 
-    public User(String screenName, String profileImageUrl, String bio) {
+    public User(String screenName, String fullName, String profileImageUrl, String bio) {
         this.screenName = screenName;
+        this.fullName = fullName;
         this.profileImageUrl = profileImageUrl;
         this.bio = bio;
     }
@@ -52,5 +56,9 @@ public class User {
 
     public String getBio() {
         return bio;
+    }
+
+    public String getFullName() {
+        return fullName;
     }
 }

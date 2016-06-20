@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/follower_item_row"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="6dp"
+    card_view:cardCornerRadius="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:orientation="horizontal">
+
+
+        <ImageView
+            android:id="@+id/follower_profile_image"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/follower_full_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Iron man"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/follower_screen_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Irony"
+                android:typeface="monospace" />
+
+            <TextView
+                android:id="@+id/follower_bio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="2"
+                android:text="first one to fly in full metal suit, able to fly and hit" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

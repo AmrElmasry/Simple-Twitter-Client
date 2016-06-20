@@ -18,15 +18,20 @@ import com.example.amrelmasry.simpletwitterclient.authentication.AuthFragment;
 import com.example.amrelmasry.simpletwitterclient.common.models.AccessToken;
 import com.example.amrelmasry.simpletwitterclient.common.models.User;
 import com.example.amrelmasry.simpletwitterclient.common.utils.NetworkUtils;
+import com.example.amrelmasry.simpletwitterclient.followers.FollowersFragment;
 import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements AuthFragment.OnAuthFinishListener, AccountManagerFragment.OnAccountManagerInteractionListener {
+public class MainActivity extends AppCompatActivity
+        implements AuthFragment.OnAuthFinishListener,
+        AccountManagerFragment.OnAccountManagerInteractionListener,
+        FollowersFragment.OnFollowersInteractionListener {
 
     private static final String SAVED_USER_KEY = "SavedUserKey";
     private static String AUTH_FRAGMENT_TAG = "AuthFragmentTag";
+    private static String FOLLOWERS_FRAGMENT_TAG = "FollowersFragmentTag";
     private static String ACCOUNT_MANAGER_FRAGMENT_TAG = "AccountManagerFragmentTag";
     private static String ACCESS_TOKEN_SHARED_PREFERENCES = "AccessTokenSharedPreferences";
     private static String TOKEN_KEY = "TokenKey";
@@ -41,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements AuthFragment.OnAu
     TextView userScreenNameTextView;
 
     private AccessToken mAccessToken;
+    private String mScreenName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,14 +161,30 @@ public class MainActivity extends AppCompatActivity implements AuthFragment.OnAu
         editor.putString(SAVED_USER_KEY, user.getScreenName());
         editor.commit();
         Log.i(LOG_TAG, "Token Saved Successfully");
+        // update screenName
+        mScreenName = user.getScreenName();
         // user account saved successfully, now get user followers
-//        getLoggedInUserFollowers(); // TODO
+        getLoggedInUserFollowers(mAccessToken, mScreenName);
+    }
 
+    private void getLoggedInUserFollowers(AccessToken mAccessToken, String mScreenName) {
+        FollowersFragment followersFragment = FollowersFragment.newInstance(mAccessToken, mScreenName);
+        showFragment(followersFragment, FOLLOWERS_FRAGMENT_TAG);
     }
 
     @Override
     public void showAccountInfoError() {
         // just show toast for now
         Toast.makeText(MainActivity.this, "Failed to get Account Info", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onFollowerItemClicked(Uri uri) {
+        // show Follower Details
+    }
+
+    @Override
+    public void onNoMoreFollowersToShow() {
+        Toast.makeText(MainActivity.this, "All followers are loaded", Toast.LENGTH_SHORT).show();
     }
 }
