@@ -93,8 +93,7 @@ public class FollowerInfoFragment extends Fragment implements FollowerInfoContra
 
         // show follower info
         Picasso.with(getActivity()).load(mFollower.getBiggerProfileImageUrl()).into(followerProfileImageView);
-        // TODO
-//        Picasso.with(getActivity()).load(mFollower.getBackgroundImageUrl()).into(followerBackgroundImageView);
+        Picasso.with(getActivity()).load(mFollower.getProfileBannerUrl()).into(followerBackgroundImageView);
 
         // Inject this fragment to singleton RestComponent
         SimpleClientApp simpleClientApp = (SimpleClientApp) getActivity().getApplication();

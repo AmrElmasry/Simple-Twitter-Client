@@ -23,15 +23,15 @@ public class User {
     @SerializedName("description")
     public String bio;
 
-    @SerializedName("profile_background_image_url")
-    public String backgroundImageUrl;
+    @SerializedName("profile_banner_url")
+    public String profileBannerUrl;
 
-    public User(String screenName, String fullName, String profileImageUrl, String bio, String backgroundImageUrl) {
+    public User(String screenName, String fullName, String profileImageUrl, String bio, String profileBannerUrl) {
         this.screenName = screenName;
         this.fullName = fullName;
         this.profileImageUrl = profileImageUrl;
         this.bio = bio;
-        this.backgroundImageUrl = backgroundImageUrl;
+        this.profileBannerUrl = profileBannerUrl;
     }
 
     // required by Parceler
@@ -73,7 +73,7 @@ public class User {
         return fullName;
     }
 
-    public String getBackgroundImageUrl() {
-        return backgroundImageUrl;
+    public String getProfileBannerUrl() {
+        return profileBannerUrl;
     }
 }
