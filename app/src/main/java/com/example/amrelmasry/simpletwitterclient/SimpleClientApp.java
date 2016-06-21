@@ -2,6 +2,7 @@ package com.example.amrelmasry.simpletwitterclient;
 
 import android.app.Application;
 
+import com.example.amrelmasry.simpletwitterclient.common.injection.AppModule;
 import com.example.amrelmasry.simpletwitterclient.common.injection.AuthComponent;
 import com.example.amrelmasry.simpletwitterclient.common.injection.DaggerAuthComponent;
 import com.example.amrelmasry.simpletwitterclient.common.injection.DaggerRestComponent;
@@ -24,7 +25,10 @@ public class SimpleClientApp extends Application {
 
     public RestComponent getRestComponent(AccessToken accessToken) {
         if (restComponent == null) {
-            restComponent = DaggerRestComponent.builder().restModule(new RestModule(accessToken)).build();
+            restComponent = DaggerRestComponent.builder()
+                    .appModule(new AppModule(this))
+                    .restModule(new RestModule(accessToken))
+                    .build();
             return restComponent;
         } else {
             return restComponent;

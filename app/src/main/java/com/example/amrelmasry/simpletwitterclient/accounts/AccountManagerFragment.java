@@ -117,7 +117,6 @@ public class AccountManagerFragment extends Fragment implements AccountManagerCo
     public void onAccountInfoRetrieved(User user) {
         loadingProgressBar.setVisibility(View.INVISIBLE);
         if (mListener != null) {
-            mListener.showAccountInfoInToolbar(user);
             mListener.saveAccountInfo(user);
         }
     }
@@ -141,7 +140,6 @@ public class AccountManagerFragment extends Fragment implements AccountManagerCo
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnAccountManagerInteractionListener {
-        void showAccountInfoInToolbar(User user);
 
         void saveAccountInfo(User user);
 
