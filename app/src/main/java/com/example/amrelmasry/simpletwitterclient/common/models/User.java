@@ -2,29 +2,40 @@ package com.example.amrelmasry.simpletwitterclient.common.models;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class User {
 
     private static final String NORMAL_IMAGE_VARIANT = "_normal";
     private static final String BIGGER_IMAGE_VARIANT = "_bigger";
 
+    // public fields required by Parceler
     @SerializedName("screen_name")
-    private String screenName;
+    public String screenName;
 
     @SerializedName("name")
-    private String fullName;
+    public String fullName;
 
     @SerializedName("profile_image_url")
-    private String profileImageUrl;
+    public String profileImageUrl;
 
     @SerializedName("description")
-    private String bio;
+    public String bio;
 
+    @SerializedName("profile_background_image_url")
+    public String backgroundImageUrl;
 
-    public User(String screenName, String fullName, String profileImageUrl, String bio) {
+    public User(String screenName, String fullName, String profileImageUrl, String bio, String backgroundImageUrl) {
         this.screenName = screenName;
         this.fullName = fullName;
         this.profileImageUrl = profileImageUrl;
         this.bio = bio;
+        this.backgroundImageUrl = backgroundImageUrl;
+    }
+
+    // required by Parceler
+    public User() {
     }
 
 
@@ -60,5 +71,9 @@ public class User {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public String getBackgroundImageUrl() {
+        return backgroundImageUrl;
     }
 }

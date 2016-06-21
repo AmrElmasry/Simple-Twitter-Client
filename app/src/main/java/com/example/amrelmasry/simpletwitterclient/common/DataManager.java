@@ -1,8 +1,11 @@
 package com.example.amrelmasry.simpletwitterclient.common;
 
 import com.example.amrelmasry.simpletwitterclient.common.apiservices.ApiService;
+import com.example.amrelmasry.simpletwitterclient.common.models.Tweet;
 import com.example.amrelmasry.simpletwitterclient.common.models.User;
 import com.example.amrelmasry.simpletwitterclient.followers.FollowersResponse;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -34,4 +37,10 @@ public class DataManager {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Observable<List<Tweet>> getTweets(String screenName, int count) {
+        return apiService
+                .getTweets(screenName, count)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 }

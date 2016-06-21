@@ -21,6 +21,8 @@ import com.example.amrelmasry.simpletwitterclient.common.utils.NetworkUtils;
 import com.example.amrelmasry.simpletwitterclient.followers.FollowersFragment;
 import com.squareup.picasso.Picasso;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity
     private static String AUTH_FRAGMENT_TAG = "AuthFragmentTag";
     private static String FOLLOWERS_FRAGMENT_TAG = "FollowersFragmentTag";
     private static String ACCOUNT_MANAGER_FRAGMENT_TAG = "AccountManagerFragmentTag";
+    private static String FOLLOWER_INFO_FRAGMENT_TAG = "FollowerInfoFragmentTag";
     private static String ACCESS_TOKEN_SHARED_PREFERENCES = "AccessTokenSharedPreferences";
     private static String TOKEN_KEY = "TokenKey";
     private static String TOKEN_SECRET_KEY = "TokenSecretKey";
@@ -143,7 +146,7 @@ public class MainActivity extends AppCompatActivity
     private void showFragment(Fragment fragment, String fragmentTag) {
         Log.i(LOG_TAG, "Sowing the fragment: " + fragment.getClass().getSimpleName());
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment, fragmentTag);
+        fragmentTransaction.replace(R.id.main_activity_fragment_container, fragment, fragmentTag);
         fragmentTransaction.commit();
     }
 
@@ -180,7 +183,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFollowerItemClicked(User follower) {
-        // show Follower Details
+        // open FollowerInfoActivity to show Follower Info
+        Intent intent = new Intent(this,FollowerInfoActivity.class);
+        intent.putExtra("Follower", Parcels.wrap(follower));
+        intent.putExtra("AccessToken", Parcels.wrap(mAccessToken));
+        startActivity(intent);
     }
 
     @Override
