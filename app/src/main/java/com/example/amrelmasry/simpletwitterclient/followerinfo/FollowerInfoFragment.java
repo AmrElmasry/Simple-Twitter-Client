@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -123,9 +124,23 @@ public class FollowerInfoFragment extends Fragment implements FollowerInfoContra
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         tweetsRecyclerView.setLayoutManager(layoutManager);
 
+        // to override the up button behavior
+        setHasOptionsMenu(true);
+
         return view;
     }
 
+
+    // override the up button behavior
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                getActivity().onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     public void onTweetsRetrieved(List<Tweet> tweets) {
@@ -134,5 +149,6 @@ public class FollowerInfoFragment extends Fragment implements FollowerInfoContra
         adapter.addTweets(tweets);
         adapter.notifyItemRangeInserted(cursorSize, tweets.size());
     }
+
 
 }
