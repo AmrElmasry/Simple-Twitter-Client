@@ -19,12 +19,25 @@ public class FollowersPresenter extends BasePresenter<FollowersContract.View>
         this.mDataManager = mDataManager;
     }
 
+
     @Override
     public void retrieveFollowers(String screenName, String cursor) {
         mDataManager.getFollowersList(screenName, cursor).subscribe(followersResponse -> {
             Log.i(LOG_TAG, "Followers Retrieved Successfully");
             view.onFollowersRetrieved(followersResponse.getFollowers());
-            view.updateCursor(followersResponse.getNextCursor());
+            view.onNextCursorRetrieved(followersResponse.getNextCursor());
+        }, throwable -> {
+            view.onFailedToRetrieveFollowers();
+            Log.e(LOG_TAG, "Failed to retrieve Followers" + throwable.getMessage());
+        });
+    }
+
+    @Override
+    public void reloadFollowers(String screenName, String cursor) {
+        mDataManager.getFollowersList(screenName, cursor).subscribe(followersResponse -> {
+            Log.i(LOG_TAG, "Followers Retrieved Successfully");
+            view.onReloadComplete(followersResponse.getFollowers());
+            view.onNextCursorRetrieved(followersResponse.getNextCursor());
         }, throwable -> {
             view.onFailedToRetrieveFollowers();
             Log.e(LOG_TAG, "Failed to retrieve Followers" + throwable.getMessage());

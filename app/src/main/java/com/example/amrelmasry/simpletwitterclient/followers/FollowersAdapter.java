@@ -59,6 +59,10 @@ public class FollowersAdapter extends RecyclerView.Adapter<FollowersAdapter.View
         return mFollowers.get(position);
     }
 
+    public void clear() {
+        mFollowers.clear();
+    }
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 

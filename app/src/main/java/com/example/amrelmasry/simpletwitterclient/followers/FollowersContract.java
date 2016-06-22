@@ -10,7 +10,9 @@ public interface FollowersContract {
     interface View extends BaseViewInterface {
         void onFollowersRetrieved(List<User> followers);
 
-        void updateCursor(String newCursor);
+        void onReloadComplete(List<User> followers);
+
+        void onNextCursorRetrieved(String newCursor);
 
         void onFailedToRetrieveFollowers();
     }
@@ -18,5 +20,7 @@ public interface FollowersContract {
     // implemented by the Presenter
     interface Presenter {
         void retrieveFollowers(String screenName, String cursor);
+
+        void reloadFollowers(String screenName, String cursor);
     }
 }
