@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 
 import com.example.amrelmasry.simpletwitterclient.R;
 import com.example.amrelmasry.simpletwitterclient.SimpleClientApp;
@@ -31,7 +32,10 @@ public class AuthFragment extends Fragment implements AuthContract.View {
     @Inject
     AuthPresenter presenter;
     @BindView(R.id.login_button)
-    Button button;
+    Button loginButton;
+    @BindView(R.id.auth_progress_bar)
+    ProgressBar progressBar;
+
     private OnAuthFinishListener mListener;
 
     public AuthFragment() {
@@ -58,6 +62,8 @@ public class AuthFragment extends Fragment implements AuthContract.View {
 
     @OnClick(R.id.login_button)
     public void login() {
+        loginButton.setVisibility(View.INVISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         presenter.retrieveRequestToken();
     }
 

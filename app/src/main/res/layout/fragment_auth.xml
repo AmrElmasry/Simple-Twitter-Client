@@ -4,6 +4,13 @@
     android:layout_height="match_parent"
     tools:context="com.example.amrelmasry.simpletwitterclient.authentication.AuthFragment">
 
+    <ProgressBar
+        android:id="@+id/auth_progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="invisible" />
+
     <Button
         android:id="@+id/login_button"
         android:layout_width="wrap_content"
