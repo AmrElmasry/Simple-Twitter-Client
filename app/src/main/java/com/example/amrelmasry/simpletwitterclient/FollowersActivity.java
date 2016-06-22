@@ -45,7 +45,6 @@ public class FollowersActivity extends AppCompatActivity
         ButterKnife.bind(this);
         // Setup the toolbar
         setSupportActionBar(toolbar);
-
         Intent intent = getIntent();
         mAccessToken = Parcels.unwrap(intent.getParcelableExtra("ACCESS_TOKEN"));
         mCurrentUserScreenName = intent.getStringExtra("USER_SCREEN_NAME");
