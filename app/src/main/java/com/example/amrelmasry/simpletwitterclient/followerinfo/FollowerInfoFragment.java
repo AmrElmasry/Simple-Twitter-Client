@@ -1,14 +1,19 @@
 package com.example.amrelmasry.simpletwitterclient.followerinfo;
 
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.amrelmasry.simpletwitterclient.R;
 import com.example.amrelmasry.simpletwitterclient.SimpleClientApp;
@@ -34,23 +39,25 @@ public class FollowerInfoFragment extends Fragment implements FollowerInfoContra
     private static final String ARG_ACCESS_TOKEN = "AccessTokenParam";
     private static final int TWEETS_COUNT = 10;
     private final String LOG_TAG = getClass().getSimpleName();
-
-    private User mFollower;
-    private AccessToken mAccessToken;
-
-    private FollowerInfoAdapter adapter;
-
     @Inject
     FollowerInfoPresenter presenter;
-
     @BindView(R.id.follower_info_tweets_recycler_view)
     RecyclerView tweetsRecyclerView;
-
     @BindView(R.id.follower_info_profile_image)
     ImageView followerProfileImageView;
-
     @BindView(R.id.follower_info_background_image)
     ImageView followerBackgroundImageView;
+    @BindView(R.id.follower_info_toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.follower_info_collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbar;
+    @BindView(R.id.follower_info_screen_name)
+    TextView screenNameTextView;
+    @BindView(R.id.follower_info_bio)
+    TextView bioTextView;
+    private User mFollower;
+    private AccessToken mAccessToken;
+    private FollowerInfoAdapter adapter;
 
 
     public FollowerInfoFragment() {
@@ -90,10 +97,18 @@ public class FollowerInfoFragment extends Fragment implements FollowerInfoContra
         View view = inflater.inflate(R.layout.fragment_follower_info, container, false);
         ButterKnife.bind(this, view);
 
+        ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         // show follower info
+        collapsingToolbar.setTitle(mFollower.getFullName());
+        collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(getActivity(), android.R.color.transparent));
+
         Picasso.with(getActivity()).load(mFollower.getBiggerProfileImageUrl()).into(followerProfileImageView);
         Picasso.with(getActivity()).load(mFollower.getProfileBannerUrl()).into(followerBackgroundImageView);
+
+        screenNameTextView.setText("@" + mFollower.getScreenName());
+        bioTextView.setText(mFollower.getBio());
 
         // Inject this fragment to singleton RestComponent
         SimpleClientApp simpleClientApp = (SimpleClientApp) getActivity().getApplication();

@@ -55,7 +55,7 @@ public class FollowerInfoAdapter extends RecyclerView.Adapter<FollowerInfoAdapte
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.signle_tweet_item)
+        @BindView(R.id.tweet_text)
         TextView tweetText;
 
 
