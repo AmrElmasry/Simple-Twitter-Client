@@ -30,7 +30,7 @@ public class AuthInteractor {
      *
      * @return Observable of String Authorization url , use it for retrieving access token
      */
-    public Observable<String> getReguestToken() {
+    public Observable<String> getRequestToken() {
         return Observable.create((Observable.OnSubscribe<String>) subscriber -> {
             try {
                 String url = httpOAuthProvider.retrieveRequestToken(httpOAuthConsumer, NetworkUtils.CALLBACK_URL);

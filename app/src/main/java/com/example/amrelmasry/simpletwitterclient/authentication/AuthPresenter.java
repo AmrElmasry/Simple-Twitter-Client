@@ -19,7 +19,7 @@ public class AuthPresenter extends BasePresenter<AuthContract.View> implements A
 
     @Override
     public void retrieveRequestToken() {
-        authInteractor.getReguestToken()
+        authInteractor.getRequestToken()
                 .subscribe(url -> {
                     view.onRequestTokenRetrieved(url);
 

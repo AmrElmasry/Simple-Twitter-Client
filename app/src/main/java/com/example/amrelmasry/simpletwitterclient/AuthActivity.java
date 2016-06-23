@@ -3,10 +3,10 @@ package com.example.amrelmasry.simpletwitterclient;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -20,15 +20,14 @@ import org.parceler.Parcels;
 
 public class AuthActivity extends AppCompatActivity implements AuthFragment.OnAuthFinishListener,
         AccountManagerFragment.OnAccountManagerInteractionListener {
-    private final String LOG_TAG = getClass().getSimpleName();
-    private static String AUTH_FRAGMENT_TAG = "AuthFragmentTag";
-    private static String ACCOUNT_MANAGER_FRAGMENT_TAG = "AccountManagerFragmentTag";
+    private static final String AUTH_FRAGMENT_TAG = "AuthFragmentTag";
+    private static final String ACCOUNT_MANAGER_FRAGMENT_TAG = "AccountManagerFragmentTag";
     private static final String SAVED_USER_SHARED_PREFERENCES = "ScreenNamePreferences";
     private static final String SCREEN_NAME_KEY = "SavedUserKey";
     private static final String ACCESS_TOKEN_SHARED_PREFERENCES = "AccessTokenSharedPreferences";
     private static final String TOKEN_KEY = "TokenKey";
     private static final String TOKEN_SECRET_KEY = "TokenSecretKey";
-
+    private final String LOG_TAG = getClass().getSimpleName();
     private AccessToken mAccessToken;
     private String mCurrentUserScreenName;
 
@@ -45,11 +44,11 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.OnAu
         if (mCurrentUserScreenName != null && !mAccessToken.isEmpty()) {
             // user is logged in before
             // show user followers
-            Log.d(LOG_TAG,"user is logged in, show followers");
+            Log.d(LOG_TAG, "user is logged in, show followers");
             startFollowersActivity();
         } else {
             // show register screen
-            Log.d(LOG_TAG,"user is not logged in, show log in button");
+            Log.d(LOG_TAG, "user is not logged in, show log in button");
             openLoginScreen();
         }
     }
@@ -63,8 +62,8 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.OnAu
 
     @Override
     public void showAuthError() {
-        // TODO handle error cases later
         Log.e(LOG_TAG, "AuthError");
+        Toast.makeText(AuthActivity.this, "Authentication error, try to login again", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -93,8 +92,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.OnAu
 
     @Override
     public void showAccountInfoError() {
-        // just show toast for now
-        Toast.makeText(this, "Failed to get Account Info", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Failed to get Account Info, try log in again", Toast.LENGTH_SHORT).show();
     }
 
     private void showFragment(Fragment fragment, String fragmentTag) {
@@ -130,7 +128,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.OnAu
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(TOKEN_KEY, accessToken.getToken());
         editor.putString(TOKEN_SECRET_KEY, accessToken.getTokenSecret());
-        editor.commit();
+        editor.apply();
         Log.i(LOG_TAG, "Token Saved Successfully");
 
         // set current AccessToken
@@ -146,7 +144,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.OnAu
         SharedPreferences sharedPreferences = getSharedPreferences(SAVED_USER_SHARED_PREFERENCES, MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString(SCREEN_NAME_KEY, user.getScreenName());
-        editor.commit();
+        editor.apply();
         Log.i(LOG_TAG, "Token Saved Successfully");
         // update screenName
         mCurrentUserScreenName = user.getScreenName();
@@ -166,6 +164,4 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.OnAu
         return sharedPreferences.getString(SCREEN_NAME_KEY, null);
 
     }
-
-
 }

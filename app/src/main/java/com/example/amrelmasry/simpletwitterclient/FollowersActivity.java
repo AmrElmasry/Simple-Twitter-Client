@@ -23,7 +23,7 @@ public class FollowersActivity extends AppCompatActivity
         implements
         FollowersFragment.OnFollowersInteractionListener {
 
-    private static String FOLLOWERS_FRAGMENT_TAG = "FollowersFragmentTag";
+    private static final String FOLLOWERS_FRAGMENT_TAG = "FollowersFragmentTag";
 
 
     private final String LOG_TAG = getClass().getSimpleName();
