@@ -38,4 +38,41 @@ This application developed in MVP architecture.
 
 ![alt text](https://github.com/AmrElmasry/Simple-Twitter-Client/blob/master/architecture/Arch.png "Application Architecture")
 
++ as the above illustration indicates, the model layer is represented by two classes AuthInteractor and DataManger
++ they handle the api calls and provide methods that return Observables to be subscribe to
++ this is an example from the DataManager class : 
+```
+ public Observable<List<Tweet>> getTweets(String screenName, int count) {
+        return apiService
+                .getTweets(screenName, count)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+```
++ then the presenter role os to subscribe to these observables and handle the success and failure cases by guiding the view what to do in each case 
++ this is an example from the FollowerInfoPresenter class : 
+```
+@Override
+    public void retrieveLastTweetsInfo(String screenName, int count) {
+        mDataManager.getTweets(screenName, count).subscribe(tweets -> {
+            view.onTweetsRetrieved(tweets);
+            Log.i(LOG_TAG, "Tweets Retrieved successfully");
+        }, throwable -> {
+            Log.e(LOG_TAG, throwable.getMessage());
+            view.onTweetsRetrieveError();
+        });
+    }
+```
++ so here the FollowerInfoFragment is the view and its role is to update the view 
++ this is an example from the FollowerInfoFragment class : 
+```
+ @Override
+    public void onTweetsRetrieved(List<Tweet> tweets) {
+        Log.i(LOG_TAG, "Received followers, show them in recycle view");
+        int cursorSize = adapter.getItemCount();
+        adapter.addTweets(tweets);
+        adapter.notifyItemRangeInserted(cursorSize, tweets.size());
+    }
+```
+as shown, by this architecture a lot of complexity are delegated to the presenters and the data manger and the views role is to only update the view
 
