@@ -108,7 +108,7 @@ public class FollowerInfoFragment extends Fragment implements FollowerInfoContra
         Picasso.with(getActivity()).load(mFollower.getBiggerProfileImageUrl()).into(followerProfileImageView);
         Picasso.with(getActivity()).load(mFollower.getProfileBannerUrl()).into(followerBackgroundImageView);
 
-        screenNameTextView.setText("@" + mFollower.getScreenName());
+        screenNameTextView.setText(String.format("@%s", mFollower.getScreenName()));
         bioTextView.setText(mFollower.getBio());
 
         // Inject this fragment to singleton RestComponent
