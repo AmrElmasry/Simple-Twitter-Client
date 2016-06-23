@@ -63,7 +63,7 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.OnAu
     @Override
     public void showAuthError() {
         Log.e(LOG_TAG, "AuthError");
-        Toast.makeText(AuthActivity.this, "Authentication error, try to login again", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AuthActivity.this, R.string.auth_error_msg, Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -84,15 +84,15 @@ public class AuthActivity extends AppCompatActivity implements AuthFragment.OnAu
 
     private void startFollowersActivity() {
         Intent intent = new Intent(this, FollowersActivity.class);
-        intent.putExtra("USER_SCREEN_NAME", mCurrentUserScreenName);
-        intent.putExtra("ACCESS_TOKEN", Parcels.wrap(mAccessToken));
+        intent.putExtra(getString(R.string.auth_screen_name), mCurrentUserScreenName);
+        intent.putExtra(getString(R.string.auth_access_token), Parcels.wrap(mAccessToken));
         startActivity(intent);
         finish();
     }
 
     @Override
     public void showAccountInfoError() {
-        Toast.makeText(this, "Failed to get Account Info, try log in again", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.account_info_error, Toast.LENGTH_SHORT).show();
     }
 
     private void showFragment(Fragment fragment, String fragmentTag) {

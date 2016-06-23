@@ -1,8 +1,15 @@
 <resources>
     <string name="app_name">Simple Twitter Client</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="log_in_with_twitter">Log in with Twitter</string>
     <string name="title_activity_follower_info">FollowerInfoActivity</string>
+
+    <string name="auth_error_msg">Authentication error, try to login again</string>
+    <string name="account_info_error">Failed to get Account Info, try log in again</string>
+    <string name="all_followers_loaded">All followers are loaded</string>
+    <string name="follower_key">Follower</string>
+    <string name="access_key">AccessToken</string>
+    <string name="auth_access_token">ACCESS_TOKEN</string>
+    <string name="auth_screen_name">USER_SCREEN_NAME</string>
+
 </resources>

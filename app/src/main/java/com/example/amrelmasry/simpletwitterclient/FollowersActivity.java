@@ -46,8 +46,8 @@ public class FollowersActivity extends AppCompatActivity
         // Setup the toolbar
         setSupportActionBar(toolbar);
         Intent intent = getIntent();
-        mAccessToken = Parcels.unwrap(intent.getParcelableExtra("ACCESS_TOKEN"));
-        mCurrentUserScreenName = intent.getStringExtra("USER_SCREEN_NAME");
+        mAccessToken = Parcels.unwrap(intent.getParcelableExtra(getString(R.string.auth_access_token)));
+        mCurrentUserScreenName = intent.getStringExtra(getString(R.string.auth_screen_name));
         // check if the User is logged in, get saved data
         updateToolbar();
         getUserFollowers();
@@ -76,13 +76,13 @@ public class FollowersActivity extends AppCompatActivity
     public void onFollowerItemClicked(User follower) {
         // open FollowerInfoActivity to show Follower Info
         Intent intent = new Intent(this, FollowerInfoActivity.class);
-        intent.putExtra("Follower", Parcels.wrap(follower));
-        intent.putExtra("AccessToken", Parcels.wrap(mAccessToken));
+        intent.putExtra(getString(R.string.follower_key), Parcels.wrap(follower));
+        intent.putExtra(getString(R.string.access_key), Parcels.wrap(mAccessToken));
         startActivity(intent);
     }
 
     @Override
     public void onNoMoreFollowersToShow() {
-        Toast.makeText(this, "All followers are loaded", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.all_followers_loaded, Toast.LENGTH_SHORT).show();
     }
 }

@@ -19,8 +19,8 @@ public class FollowerInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_follower_info);
 
         Intent intent = getIntent();
-        User follower = Parcels.unwrap(intent.getParcelableExtra("Follower"));
-        AccessToken accessToken = Parcels.unwrap((intent.getParcelableExtra("AccessToken")));
+        User follower = Parcels.unwrap(intent.getParcelableExtra(getString(R.string.follower_key)));
+        AccessToken accessToken = Parcels.unwrap((intent.getParcelableExtra(getString(R.string.access_key))));
         FollowerInfoFragment followerInfoFragment =
                 FollowerInfoFragment.newInstance(follower, accessToken);
 
