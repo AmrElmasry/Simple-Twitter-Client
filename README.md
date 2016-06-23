@@ -26,5 +26,12 @@ with hiw last ten tweets
 7. Parceler for faster way to make objects parecelable 
 
 ## Architecture & Design :
-1. MVP architecture 
-2. Package by feature
+This application developed in MVP architecture.
+
+* Why MVP :
+1. achieve seperation of concerns principle (seperate views from bussiness logic stuff)
+2. reduce activities classes sizes, make views handle what to show only and delegate logic stuff to presenters and models
+3. more testable and maintanable code, presenters and models can be test by simple fast tests becase all android-related work are done by the views only
+
+* Application Arch :
+
