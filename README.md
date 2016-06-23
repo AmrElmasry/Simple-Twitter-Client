@@ -17,13 +17,13 @@ with hiw last ten tweets
 
 
 ## Libraries :
-1. Rx java, it reduces async tasks and make code more concise 
-2. Retrofit 2 for network call, it supports rx java observables
-3. Signpost : for authentication process it supports authorizing Retrofit calls 
-4. Butter knife for injecting views 
-5. Dagger 2 for dependcies injection 
-6. Gaon Retrofit adapter for handling json 
-7. Parceler for faster way to make objects parecelable 
+1. Rx java : it reduces async tasks and make code more concise 
+2. Retrofit 2 : for asyncronous network calls, also it supports rx java observables
+3. Signpost : for authentication process, also it supports authorizing Retrofit calls 
+4. Butterknife : for injecting views 
+5. Dagger 2 : for dependcies injection 
+6. Gaon Retrofit Adapter : for handling deserialization the json responses into java objects
+7. Parceler : for making objects parecelable fast 
 
 ## Architecture & Design :
 This application developed in MVP architecture.
