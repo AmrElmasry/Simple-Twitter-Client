@@ -29,9 +29,13 @@ with hiw last ten tweets
 This application developed in MVP architecture.
 
 * Why MVP :
+
 1. achieve seperation of concerns principle (seperate views from bussiness logic stuff)
 2. reduce activities classes sizes, make views handle what to show only and delegate logic stuff to presenters and models
 3. more testable and maintanable code, presenters and models can be test by simple fast tests becase all android-related work are done by the views only
 
 * Application Arch :
+
+![alt text](https://github.com/AmrElmasry/Simple-Twitter-Client/blob/master/architecture/Arch.png "Application Architecture")
+
 
