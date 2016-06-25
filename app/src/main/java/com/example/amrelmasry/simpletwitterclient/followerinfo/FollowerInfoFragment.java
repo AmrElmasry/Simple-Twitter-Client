@@ -21,6 +21,7 @@ import com.example.amrelmasry.simpletwitterclient.SimpleClientApp;
 import com.example.amrelmasry.simpletwitterclient.common.models.AccessToken;
 import com.example.amrelmasry.simpletwitterclient.common.models.Tweet;
 import com.example.amrelmasry.simpletwitterclient.common.models.User;
+import com.example.amrelmasry.simpletwitterclient.common.utils.RecyclerViewItemsDecoration;
 import com.squareup.picasso.Picasso;
 
 import org.parceler.Parcels;
@@ -121,6 +122,7 @@ public class FollowerInfoFragment extends Fragment implements FollowerInfoContra
         // initialize the adapter
         adapter = new FollowerInfoAdapter(new ArrayList<>());
         tweetsRecyclerView.setAdapter(adapter);
+        tweetsRecyclerView.addItemDecoration(new RecyclerViewItemsDecoration(getActivity()));
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         tweetsRecyclerView.setLayoutManager(layoutManager);
 
