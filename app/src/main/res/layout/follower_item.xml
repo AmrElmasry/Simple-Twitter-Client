@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/follower_item_row"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="6dp"
-    card_view:cardCornerRadius="4dp">
+    android:clickable="true"
+    android:elevation="4dp"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_margin="10dp"
         android:orientation="horizontal">
 
 
@@ -20,11 +20,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-            android:layout_weight="1" />
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="4dp"
             android:layout_weight="3"
             android:orientation="vertical">
 
@@ -41,13 +44,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Irony"
+                android:textColor="#6D6F7A"
                 android:typeface="monospace" />
 
             <TextView
                 android:id="@+id/follower_bio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="2"
+                android:maxLines="4"
                 android:text="first one to fly in full metal suit, able to fly and hit" />
         </LinearLayout>
     </LinearLayout>

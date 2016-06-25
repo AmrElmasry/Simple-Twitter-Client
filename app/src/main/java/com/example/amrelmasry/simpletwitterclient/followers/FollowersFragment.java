@@ -18,6 +18,7 @@ import com.example.amrelmasry.simpletwitterclient.common.models.AccessToken;
 import com.example.amrelmasry.simpletwitterclient.common.models.User;
 import com.example.amrelmasry.simpletwitterclient.common.utils.EndlessRecyclerViewScrollListener;
 import com.example.amrelmasry.simpletwitterclient.common.utils.ItemClickSupport;
+import com.example.amrelmasry.simpletwitterclient.common.utils.RecyclerViewItemsDecoration;
 
 import org.parceler.Parcels;
 
@@ -109,6 +110,7 @@ public class FollowersFragment extends Fragment implements FollowersContract.Vie
         followersRecyclerView.setAdapter(mAdapter);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         followersRecyclerView.setLayoutManager(layoutManager);
+        followersRecyclerView.addItemDecoration(new RecyclerViewItemsDecoration(getActivity()));
         followersRecyclerView.addOnScrollListener(new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override
             public void onLoadMore(int page, int totalItemsCount) {

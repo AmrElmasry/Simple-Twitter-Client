@@ -14,7 +14,7 @@ android {
     }
     defaultConfig {
         applicationId "com.example.amrelmasry.simpletwitterclient"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
