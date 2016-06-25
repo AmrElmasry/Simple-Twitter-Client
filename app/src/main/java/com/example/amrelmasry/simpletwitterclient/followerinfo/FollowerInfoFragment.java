@@ -1,9 +1,7 @@
 package com.example.amrelmasry.simpletwitterclient.followerinfo;
 
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -51,8 +49,6 @@ public class FollowerInfoFragment extends Fragment implements FollowerInfoContra
     ImageView followerBackgroundImageView;
     @BindView(R.id.follower_info_toolbar)
     Toolbar toolbar;
-    @BindView(R.id.follower_info_collapsing_toolbar)
-    CollapsingToolbarLayout collapsingToolbar;
     @BindView(R.id.follower_info_screen_name)
     TextView screenNameTextView;
     @BindView(R.id.follower_info_bio)
@@ -101,14 +97,10 @@ public class FollowerInfoFragment extends Fragment implements FollowerInfoContra
 
         ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
         ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         // show follower info
-        collapsingToolbar.setTitle(mFollower.getFullName());
-        collapsingToolbar.setExpandedTitleColor(ContextCompat.getColor(getActivity(), android.R.color.transparent));
-
+        ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(mFollower.getFullName());
         Picasso.with(getActivity()).load(mFollower.getBiggerProfileImageUrl()).into(followerProfileImageView);
         Picasso.with(getActivity()).load(mFollower.getProfileBannerUrl()).into(followerBackgroundImageView);
-
         screenNameTextView.setText(String.format("@%s", mFollower.getScreenName()));
         bioTextView.setText(mFollower.getBio());
 
