@@ -15,35 +15,36 @@
         android:orientation="horizontal">
 
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/follower_profile_image"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="top"
             android:layout_margin="4dp"
-            android:layout_weight="1"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="16dp"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="4dp"
-            android:layout_weight="3"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingEnd="10dp"
+            android:paddingStart="10dp">
 
             <TextView
                 android:id="@+id/follower_full_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Iron man"
-                android:textSize="16sp"
+                android:textSize="@dimen/follower_full_name_size"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/follower_screen_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Irony"
                 android:textColor="#6D6F7A"
                 android:typeface="monospace" />
 
@@ -51,8 +52,7 @@
                 android:id="@+id/follower_bio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="4"
-                android:text="first one to fly in full metal suit, able to fly and hit" />
+                android:maxLines="4" />
         </LinearLayout>
     </LinearLayout>
 
